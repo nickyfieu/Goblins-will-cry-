@@ -1,0 +1,219 @@
+///		____________   _________________________.____    ________ __________________   
+///		\_____  \   \ /   /\_   _____/\______   \    |   \_____  \\______   \______ \  
+/// 	 /   |   \   Y   /  |    __)_  |       _/    |    /   |   \|       _/|    |  \  
+///		/    |    \     /   |        \ |    |   \    |___/    |    \    |   \|    `   \ 
+///		\_______  /\___/   /_______  / |____|_  /_______ \_______  /____|_  /_______  / 
+///				\/                 \/         \/        \/       \/       \/        \/ 
+///		.____     _______________   _______________.____                                
+///		|    |    \_   _____/\   \ /   /\_   _____/|    |                               
+///		|    |     |    __)_  \   Y   /  |    __)_ |    |                               
+///		|    |___  |        \  \     /   |        \|    |___                            
+///		|_______ \/_______  /   \___/   /_______  /|_______ \                           
+///		        \/        \/                    \/         \/                           
+///		___________.___.____     ___________                                            
+///		\_   _____/|   |    |    \_   _____/                                            
+///		 |    __)  |   |    |     |    __)_                                             
+///		 |     \   |   |    |___  |        \                                            
+///		 \___  /   |___|_______ \/_______  /                                            
+///		     \/                \/        \/                                             
+///		________________.___._____________________                                      
+///		\__    ___/\__  |   |\______   \_   _____/                                      
+///		  |    |    /   |   | |     ___/|    __)_                                       
+///		  |    |    \____   | |    |    |        \                                      
+///		  |____|    / ______| |____|   /_______  /                                      
+///		            \/                         \/   
+///     
+/// Made by Fieu Nicky.
+///
+/// If you make an object with an material id that is defined below
+/// the definition of the object it will probably give you a crash.
+/// 
+
+///----------------------------------------------///
+/// Note! : NO SPACE ALLOWED INFRONT OF COMMENTS ///
+/// The layout of this file should be first to	 ///
+/// to define all materials and then define all	 ///
+/// the gameobjects you need for the level		 ///
+///----------------------------------------------///
+
+///-------------------///
+/// Example Materials ///
+///-------------------///
+
+///--------------------------------------------------------------------------------------------------------------------------///
+/// Note! : The names you can give in this file to gameobjects/materials is for finding the material this does not get used! ///
+///--------------------------------------------------------------------------------------------------------------------------///
+
+< SkinnedDiffuseMaterial "SomeMaterialName" = ID{0}
+	DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}
+>
+
+///-------------------------------///
+/// Example GameObject/Components ///
+///-------------------------------///
+
+///--------------------------------------------------------------------------------------///
+/// Note! : ID -1 means it does not add the object to a local object vector in the scene ///
+///--------------------------------------------------------------------------------------///
+
+< GameObject "SomeGameObjectName" = ID{0}
+	< RigidBodyComponent =
+		IsStatic{0}
+		IsKinematic{0}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>
+		< PhysXTriangleMesh =
+			Mesh{./Resources/Meshes/SimpleLevel.ovpt}
+			MeshScale{1.0}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{0.0,0.0,1.0}
+		>
+	>
+>
+
+///-------------------------------------------------------------------------------------------------------------///
+/// All materials currently implemented                                                                         ///
+///-------------------------------------------------------------------------------------------------------------///
+///                                                                                                             ///
+///	< DiffuseMaterial "SomeMaterialName" = ID{0}                                                                ///
+///		DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}											///
+///	>                                                                                                           ///
+///                                                                                                             ///
+/// < SkinnedDiffuseMaterial "SomeMaterialName" = ID{0}                                                         ///
+///		DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}                                            ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+/// < SpikeyMaterial "SomeMaterialName" = ID{0}                                                                 ///
+///		DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}                                            ///
+///	>                                                                                                           ///
+///																												///
+/// < DiffuseShadowMaterial "somematerialname" = ID{0}															///
+///		DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}											///
+/// >																											///
+///                                                                                                             ///
+///	< UberShaderMaterial "SomeMaterialName" = ID{0}                                                             ///
+///		UseDiffuseTexture{0}                                                                                    ///
+///		UseHalfLambert{0}                                                                                       ///
+///		DiffuseColor{0.0,0.0,0.0,0.0}                                                                           ///
+///		DiffuseTexture{./Resources/Textures/SomeTexture_Diffuse.png}                                            ///
+///		SpecularColor{0.0,0.0,0.0,0.0}                                                                          ///
+///		UseSpecularLevelTexture{0}                                                                              ///
+///		SpecularLevelTexture{./Resources/Textures/SomeTexture_Specular.png}                                     ///
+///		Shininess{0}                                                                                            ///
+///		AmbientColor{0.0,0.0,0.0,0.0}                                                                           ///
+///		AmbientIntensity{0.0}                                                                                   ///
+///		FlipNormals{0}                                                                                          ///
+///		UseNormalMapping{0}                                                                                     ///
+///		NormalMapTexture{./Resources/Textures/SomeTexture_Normal.png}                                           ///
+///		UseEnvironmentMapping{0}                                                                                ///
+///		EnvironmentCube{./Resources/Textures/SomeTexture_Cube.png}                                              ///
+///		ReflectionStrength{0.0}                                                                                 ///
+///		RefractionStrength{0.0}                                                                                 ///
+///		RefractionIndex{0.0}                                                                                    ///
+///		Opacity{0.0}                                                                                            ///
+///		UseOpacityMap{0}                                                                                        ///
+///		OpacityMap{./Resources/Textures/Opacity.png}                                                            ///
+///		UseSpecularBlin{0}                                                                                      ///
+///		UseSpecularPhong{0}                                                                                     ///
+///		UseFresnelFaloff{0}                                                                                     ///
+///		FresnelColor{0.0,0.0,0.0,0.0}                                                                           ///
+///		FresnelPower{0.0}                                                                                       ///
+///		FresnelMultiplier{0.0}                                                                                  ///
+///		FresnelHardness{0.0}                                                                                    ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+///-------------------------------------------------------------------------------------------------------------///
+
+///-------------------------------------------------------------------------------------------------------------///
+/// All components currently implemented                                                                        ///
+///-------------------------------------------------------------------------------------------------------------///
+///                                                                                                             ///
+///	< CameraComponent = 				                                                                        ///
+///		IsOrtho{0}                                                                                              ///
+///		FOV{0.785}                                                                                              ///
+///		OrthoSize{25.0}                                                                                         ///
+///		NearClipPlane{0.1}                                                                                      ///
+///		FarClipPlane{2500.0}                                                                                    ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+/// < ColliderComponent =                 					                                                    ///
+/// 	< PhysXMaterial =                                                                                       ///
+/// 		StaticFriction{0.0}                                                                                 ///
+/// 		DynamicFriction{0.0}                                                                                ///
+/// 		Restitution{0.0}                                                                                    ///
+/// 	>                                                                                                       ///
+///		< PhysXGeometry = 		(Note! : only PxTriangleMesh and PxConvexMesh are suported)						///
+///			Mesh{./Resources/Meshes/SimpleLevel.ovpt}                                                           ///
+///			MeshScale{1.0}                                                                                      ///
+///		>                                                                                                       ///
+/// 	< PhysXTransform =                                                                                      ///
+///			Position{0.0,0.0,0.0}                                                                               ///
+///			Angle{1.57}                                                                                         ///
+///			RotAxis{0.0,0.0,1.0}                                                                                ///
+///		>                                                                                                       ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+/// < ControllerComponent = 				                                                                    ///
+/// 	< PhysXMaterial =                                                                                       ///
+/// 		StaticFriction{0.0}                                                                                 ///
+/// 		DynamicFriction{0.0}                                                                                ///
+/// 		Restitution{0.0}                                                                                    ///
+/// 	>                                                                                                       ///
+///		Radius{2.0}                                                                                             ///
+///		Height{5.0}                                                                                             ///
+///		Name{Character}                                                                                         ///
+///		ClimbingMode{eEasy}			/ -- delete this | eEasy / eConstrained / eLast | delete this -- /          ///
+///		CollisionGroup{0}			/ -- delete this | 0 - 9 can be done multiple times | delete this -- /      ///
+///		CollisionIgnoreGroup{0}		/ -- delete this | 0 - 9 can be done multiple times | delete this -- /      ///
+///		Position{0.0,0.0,0.0}                                                                                   ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+///	< RigidBodyComponent =					                                                                    ///
+///		IsStatic{0}                                                                                             ///
+///		IsKinematic{0}                                                                                          ///
+///		CollisionGroup{0}			/ -- delete this | 0 - 9 can be done multiple times | delete this -- /      ///
+///		CollisionIgnoreGroup{0}		/ -- delete this | 0 - 9 can be done multiple times | delete this -- /      ///
+///	>                                                                                                           ///
+///		                                                                                                        ///
+///	< SpriteComponent =					                                                                        ///
+///		Sprite{./Resources/Textures/Chair_Dark.dds}                                                             ///
+///		Pivot{0.5,0.5}                                                                                          ///
+///		Color{1.0,1.0,1.0,1.0}                                                                                  ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+///	< TransformComponent =				                                                                        ///
+///		Translate{0.0,0.0,0.0}                                                                                  ///
+///		Rotate{0.0,0.0,0.0}                                                                                     ///
+///		Scale{1.0,1.0,1.0}                                                                                      ///
+/// >                                                                                                           ///
+///                                                                                                             ///
+///	< ModelComponent =                                                                                          ///
+///		Model{./Resources/Meshes/PeasantGirl.ovm}                                                               ///
+///		MaterialID{0}																							///
+///		CastShadow{1}																							///
+///	>                                                                                                           ///
+///                                                                                                             ///
+/// < ParticleEmitterComponent =                                                                                ///
+/// 	Texture{./Resources/Textures/Chair_Dark.dds}															///
+///		ParticleCount{50}                                                                                       ///
+///		MinSize{0.1f}                                                                                           ///
+///		MaxSize{2.0f}                                                                                           ///
+///		MinEnergy{1.0f}                                                                                         ///
+///		MaxEnergy{2.0f}                                                                                         ///
+///		Velocity{0.0f,0.0f,0.0f}                                                                                ///
+///		MinEmitterRange{9.0f}                                                                                   ///
+///		MaxEmitterRange{10.0f}                                                                                  ///
+///		MinSizeGrow{1.0f}                                                                                       ///
+///		MaxSizeGrow{1.0f}                                                                                       ///
+///     Color{1.0f,1.0f,1.0f,1.0f}                                                                              ///
+///	>                                                                                                           ///
+///                                                                                                             ///
+///-------------------------------------------------------------------------------------------------------------///

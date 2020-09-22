@@ -1,0 +1,40 @@
+/// Overlord Level File Type = Made by Fieu Nicky
+
+< DiffuseMaterial "GroundLayer" = ID{20}
+	DiffuseTexture{./Resources/Textures/GameTextures/GroundLayer.png}
+>
+
+< GameObject "Floor" = ID{-1}
+	< TransformComponent =		
+		Translate{0.0,0.0,0.0}
+		Rotate{1.57,0.0,0.0}   
+		Scale{1.0,1.0,1.0}    
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/Floor.ovm}
+		MaterialID{20}
+	>                 
+>	
+
+< GameObject "Collision" = ID{-1}
+	< RigidBodyComponent =
+		IsStatic{1}
+		CollisionGroup{9}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/CollisionFloor.ovpt}
+			MeshScale{1.0}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+>
