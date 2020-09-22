@@ -1,0 +1,50 @@
+/// Overlord Level File Type = Made by Fieu Nicky
+
+< DiffuseMaterial "TestMaterial" = ID{60}
+	DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}
+>
+
+< UberShaderMaterial "TestMaterial" = ID{61}
+	UseDiffuseTexture{1}
+	UseHalfLambert{1}
+	DiffuseTexture{./Resources/Textures/PeasantGirl_Diffuse.png}
+>
+
+< GameObject "BodyPart1" = ID{0}
+	< ModelComponent =
+		Model{./Resources/Meshes/PeasantGirl.ovm}
+		MaterialID{60}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/SimpleLevel.ovpt}
+			MeshScale{1.0}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{0.0}
+			RotAxis{0.0,0.0,1.0}
+		>
+	>
+	< RigidBodyComponent =
+		IsStatic{1}
+	>
+	< GameObject "BodyPart2" = ID{1}
+		< ModelComponent =
+			Model{./Resources/Meshes/PeasantGirl.ovm}
+			MaterialID{61}
+		>
+		< TransformComponent =
+			Translate{100.0,0.0,0.0}
+			Rotate{0.0,0.0,0.0}
+			Scale{1.0,1.0,1.0}
+		>
+	>
+>
+
+

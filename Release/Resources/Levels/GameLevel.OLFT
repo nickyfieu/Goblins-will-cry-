@@ -1,0 +1,261 @@
+///		____________   _________________________.____    ________ __________________   
+///		\_____  \   \ /   /\_   _____/\______   \    |   \_____  \\______   \______ \  
+/// 	 /   |   \   Y   /  |    __)_  |       _/    |    /   |   \|       _/|    |  \  
+///		/    |    \     /   |        \ |    |   \    |___/    |    \    |   \|    `   \ 
+///		\_______  /\___/   /_______  / |____|_  /_______ \_______  /____|_  /_______  / 
+///				\/                 \/         \/        \/       \/       \/        \/ 
+///		.____     _______________   _______________.____                                
+///		|    |    \_   _____/\   \ /   /\_   _____/|    |                               
+///		|    |     |    __)_  \   Y   /  |    __)_ |    |                               
+///		|    |___  |        \  \     /   |        \|    |___                            
+///		|_______ \/_______  /   \___/   /_______  /|_______ \                           
+///		        \/        \/                    \/         \/                           
+///		___________.___.____     ___________                                            
+///		\_   _____/|   |    |    \_   _____/                                            
+///		 |    __)  |   |    |     |    __)_                                             
+///		 |     \   |   |    |___  |        \                                            
+///		 \___  /   |___|_______ \/_______  /                                            
+///		     \/                \/        \/                                             
+///		________________.___._____________________                                      
+///		\__    ___/\__  |   |\______   \_   _____/                                      
+///		  |    |    /   |   | |     ___/|    __)_                                       
+///		  |    |    \____   | |    |    |        \                                      
+///		  |____|    / ______| |____|   /_______  /                                      
+///		            \/                         \/   
+///     
+/// Made by Fieu Nicky.
+///
+/// If you make an object with an material id that is defined below
+/// the definition of the object it will probably give you a crash.
+/// 
+
+< DiffuseShadowMaterial "GroundLayer" = ID{20}
+	DiffuseTexture{./Resources/Textures/GameTextures/GroundLayer.png}
+>
+
+< DiffuseShadowMaterial "WallLayer" = ID{21}
+	DiffuseTexture{./Resources/Textures/GameTextures/WallLayer.png}
+>
+
+< DiffuseShadowMaterial "WoodLayer" = ID{22}
+	DiffuseTexture{./Resources/Textures/GameTextures/WoodLayer.png}
+>
+
+< DiffuseShadowMaterial "WallDetail" = ID{23}
+	DiffuseTexture{./Resources/Textures/GameTextures/WallDetail.png}
+>
+
+< DiffuseShadowMaterial "SideGate" = ID{24}
+	DiffuseTexture{./Resources/Textures/GameTextures/SideGate.png}
+>
+
+< DiffuseShadowMaterial "TrapMaterial" = ID{59}
+	DiffuseTexture{./Resources/Textures/GameTextures/SpikeTrap.png}
+>
+
+< GameObject "Floor" = ID{-1}
+	< TransformComponent =		
+		Translate{0.0,0.0,0.0}
+		Rotate{1.57,0.0,0.0}   
+		Scale{0.1,0.1,0.1}    
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/Floor.ovm}
+		MaterialID{20}
+	>                 
+>
+
+< GameObject "LevelDetail" = ID{-1}
+	< TransformComponent =		
+		Translate{0.0,0.0,0.0}
+		Rotate{1.57,0.0,0.0}   
+		Scale{0.1,0.1,0.1}    
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelArc.ovm}
+		MaterialID{20}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelCastleGate.ovm}
+		MaterialID{24}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelCastleWallsBase.ovm}
+		MaterialID{21}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelCourtyardDetail.ovm}
+		MaterialID{24}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelCourtyardWalls.ovm}
+		MaterialID{21}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelHallBeams.ovm}
+		MaterialID{22}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelMainHallRoof.ovm}
+		MaterialID{22}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelMiddleCastleEnterance.ovm}
+		MaterialID{21}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelOuterTower.ovm}
+		MaterialID{21}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelOuterTowerDetail.ovm}
+		MaterialID{22}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelWallGuard.ovm}
+		MaterialID{23}
+	>
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelWindowFinished.ovm}
+		MaterialID{24}
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/LevelWindowFinished.ovm}
+		MaterialID{24}
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/Pillars.ovm}
+		MaterialID{24}
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/MainRoof.ovm}
+		MaterialID{21}
+	>   
+	< ModelComponent =
+		Model{./Resources/Meshes/Level/MainRoofGrate.ovm}
+		MaterialID{24}
+	>
+>	
+
+< GameObject "CollisionFloor" = ID{-1}
+	< RigidBodyComponent =
+		IsStatic{1}
+		CollisionGroup{1}
+		CollisionGroup{2}
+		CollisionGroup{7}
+		CollisionGroup{9}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/CollisionFloor.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+>
+
+< GameObject "CollisionLevel" = ID{-1}
+	< RigidBodyComponent =
+		IsStatic{1}
+		CollisionGroup{1}
+		CollisionGroup{2}
+		CollisionGroup{7}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/CollisionLevel.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/PillarCollision.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+>
+
+< GameObject "PlayerBLock" = ID{-1}
+	< RigidBodyComponent =
+		IsStatic{1}
+		CollisionGroup{1}
+		CollisionGroup{7}
+	>
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/PlayerBlockade.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,0.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/PlayerBlockade.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,-15.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+	< ColliderComponent =
+		< PhysXMaterial =
+			StaticFriction{0.0}
+			DynamicFriction{0.0}
+			Restitution{0.0}
+		>                                            
+		< PhysXGeometry =
+			Mesh{./Resources/Meshes/Level/PlayerBlockade.ovpt}
+			MeshScale{0.1}
+		>
+		< PhysXTransform =
+			Position{0.0,0.0,-30.0}
+			Angle{1.57}
+			RotAxis{1.0,0.0,0.0}
+		>
+	> 
+>
