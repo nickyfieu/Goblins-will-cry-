@@ -8,7 +8,7 @@
 	Disclaimer: only code writen by Nicky Fieu are in these samples
 */
 
-// reads custom mesh ovm file type 
+// reads custom mesh overlord mesh file type 
 MeshFilter* MeshFilterLoader::LoadContent(const std::wstring& assetFile)
 {
 	/*  Code inbetween (rough explenation) that wasn't written by Nicky Fieu
@@ -79,8 +79,10 @@ MeshFilter* MeshFilterLoader::LoadContent(const std::wstring& assetFile)
 
 				// due to the converter sometimes not adding this it broke some of the mixamo animations
 				if (name.find(L"mixamorig:") == std::string::npos)
+				{
 					name = L"mixamorig:" + name;
-
+				}
+				
 				short parrent = binReader->Read<short>();
 				// fills the matrices row by row
 				// matrix layout
@@ -110,30 +112,32 @@ MeshFilter* MeshFilterLoader::LoadContent(const std::wstring& assetFile)
 				}
 
 				// creating a skeletondata object, setting the values and pushing it to the mesh filter
-				SkeletonData* data = new SkeletonData(name);
-				data->index = id;
-				data->parrentIndex = parrent;
-				data->offset = transformMatrices[0];
-				data->localPose = transformMatrices[1];
-				data->globalPose = transformMatrices[2];
-				pMesh->m_SkeletonData.push_back(data);
+				SkeletonData* pData = new SkeletonData(name);
+				pData->index = id;
+				pData->parrentIndex = parrent;
+				pData->offset = transformMatrices[0];
+				pData->localPose = transformMatrices[1];
+				pData->globalPose = transformMatrices[2];
+				pMesh->m_SkeletonData.push_back(pData);
 			}
 
 			// after adding all the skeletondata to the mesh filter
 			// calculate all the bone lengths and adding them
-			for (SkeletonData* data : pMesh->m_SkeletonData)
+			for (SkeletonData* pData : pMesh->m_SkeletonData)
 			{
 				DirectX::XMMATRIX mSelf = DirectX::XMMatrixIdentity();
 				DirectX::XMMATRIX mParent = DirectX::XMMatrixIdentity();
 				DirectX::XMMATRIX mBaseBoneRot = DirectX::XMMatrixIdentity();
 				
 				// the current bone object self matrix is the inverse of the offset
-				mSelf = DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&data->offset));
+				mSelf = DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&pData->offset));
 				
 				// if this bone has a parrent get the parrents inverse of the offset
-				SkeletonData* parrent = pMesh->GetSkeletonDataByIndex(data->parrentIndex);
-				if (parrent)
+				SkeletonData* pParrent = pMesh->GetSkeletonDataByIndex(pData->parrentIndex);
+				if (pParrent != nullptr)
+				{
 					mParent = DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&parrent->offset));
+				}
 
 				// calculating the initial global bind pose
 				DirectX::XMVECTOR posSelf;
@@ -147,25 +151,25 @@ MeshFilter* MeshFilterLoader::LoadContent(const std::wstring& assetFile)
 				
 				// create a new bone object and add it to the meshfilter
 				const int boneMaterialIndex = 100; // if there is no material with id 100 ( should be define in the levels OLFT file )
-				BoneObject* bone = new BoneObject(data->index, boneMaterialIndex, 5.0f);
-				pMesh->m_BoneObjects[data->index] = bone;
+				BoneObject* pBone = new BoneObject(pData->index, boneMaterialIndex, 5.0f);
+				pMesh->m_BoneObjects[pData->index] = pBone;
 
 				// set the global bind pose of the bone
 				DirectX::XMFLOAT4X4 transform;
 				DirectX::XMStoreFloat4x4(&transform, mSelf);
-				bone->SetGlobalBindPose(transform);
+				pBone->SetGlobalBindPose(transform);
 				
 				// transform the bone to the correct base position
-				bone->GetTransform()->Translate(posSelf);
-				bone->GetTransform()->Rotate(rotationSelf);
+				pBone->GetTransform()->Translate(posSelf);
+				pBone->GetTransform()->Rotate(rotationSelf);
 			}
 
 			// the skeltondata that has a parrentindex that is negative is the root bone
-			for (SkeletonData* data : pMesh->m_SkeletonData)
+			for (SkeletonData* pData : pMesh->m_SkeletonData)
 			{
-				if (data->parrentIndex < 0)
+				if (pData->parrentIndex < 0)
 				{
-					pMesh->m_pBoneRoot = pMesh->m_BoneObjects[data->index];
+					pMesh->m_pBoneRoot = pMesh->m_BoneObjects[pData->index];
 				}
 			}
 		}
@@ -182,7 +186,7 @@ MeshFilter* MeshFilterLoader::LoadContent(const std::wstring& assetFile)
 	return pMesh;
 }
 
-void MeshFilterLoader::Destroy(MeshFilter* objToDestroy)
+void MeshFilterLoader::Destroy(MeshFilter* pObjToDestroy)
 {
-	SafeDelete(objToDestroy);
+	SafeDelete(pObjToDestroy);
 }
