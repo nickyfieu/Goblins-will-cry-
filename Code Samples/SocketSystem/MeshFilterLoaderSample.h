@@ -34,5 +34,5 @@ public:
 
 protected:
 	MeshFilter* LoadContent(const std::wstring& assetFile) override;
-	void Destroy(MeshFilter* objToDestroy) override;
+	void Destroy(MeshFilter* pObjToDestroy) override;
 };
