@@ -18,13 +18,13 @@ public:
 
 	void CalculateBindPose();
 	void AddBone(BoneObject* pBone);
-	void SetCollisionObject(GameObject* collisionObject);
+	void SetCollisionObject(GameObject* pCollisionObject);
 
 	inline void SetGlobalBindPose(const DirectX::XMFLOAT4X4& pose) { m_GlobalBindPose = pose; }
 
-	bool HasCollisionObject() const { return m_CollisionObj != nullptr; }
+	bool HasCollisionObject() const { return m_pCollisionObj != nullptr; }
 
-	GameObject* GetCollisionObject() const { return m_CollisionObj; };
+	GameObject* GetCollisionObject() const { return m_pCollisionObj; };
 
 	inline DirectX::XMFLOAT4X4 GetBindPose() const { return m_BindPose; }
 	inline DirectX::XMFLOAT4X4 GetGlobalBindPose() const { return m_GlobalBindPose; }
@@ -41,6 +41,5 @@ private:
 	DirectX::XMFLOAT4X4 m_BindPose;
 	DirectX::XMFLOAT4X4 m_GlobalBindPose;
 	
-	GameObject* m_CollisionObj = nullptr;
-
+	GameObject* m_pCollisionObj = nullptr;
 };
