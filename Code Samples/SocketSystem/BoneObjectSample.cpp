@@ -13,7 +13,7 @@ BoneObject::BoneObject(int boneId, int materialId, float length)
 	, m_BoneId(boneId)
 	, m_MaterialID(materialId)
 	, m_Length(length)
-	, m_CollisionObj{nullptr}
+	, m_pCollisionObj{nullptr}
 {
 	// default initializes bindpose to a identity matrix
 	DirectX::XMStoreFloat4x4(&m_BindPose, DirectX::XMMatrixIdentity());
@@ -30,11 +30,14 @@ void BoneObject::CalculateBindPose()
 {
 	// to get this bones bind pose we get the parrents ( if there is one ) world transform and take the inverse of it
 	BoneObject* Parent = static_cast<BoneObject*>(this->GetParent());
-	if (Parent)
+	
+	if (Parent == nullpr)
 	{
-		DirectX::XMMATRIX world = DirectX::XMLoadFloat4x4(&Parent->GetTransform()->GetWorld());
-		DirectX::XMStoreFloat4x4(&m_BindPose, DirectX::XMMatrixInverse(nullptr, world));
+		return;
 	}
+	
+	DirectX::XMMATRIX world = DirectX::XMLoadFloat4x4(&Parent->GetTransform()->GetWorld());
+	DirectX::XMStoreFloat4x4(&m_BindPose, DirectX::XMMatrixInverse(nullptr, world));
 }
 
 void BoneObject::Initialize(const GameContext& gameContext)
@@ -42,15 +45,19 @@ void BoneObject::Initialize(const GameContext& gameContext)
 	UNREFERENCED_PARAMETER(gameContext);
 }
 
-void BoneObject::SetCollisionObject(GameObject* collisionObject)
+// parrenting the collision object to this bone object
+void BoneObject::SetCollisionObject(GameObject* pCollisionObject)
 {
-	if (collisionObject == nullptr)
+	if (pCollisionObject == nullptr)
+	{
 		return Logger::LogInfo(L"BoneObject::SetCollisionObject invalid collisionObject!");
-
-	if (collisionObject->HasComponent<RigidBodyComponent>())
+	}
+		
+	if (pCollisionObject->HasComponent<RigidBodyComponent>())
+	{
 		return Logger::LogError(L"BoneObject::SetCollisionObject collisionObject cannot have a rigidbody component!");
-	
-	AddChild(collisionObject);
-	m_CollisionObj = collisionObject;
+	}
+		
+	AddChild(pCollisionObject);
+	m_pCollisionObj = pCollisionObject;
 }
-
