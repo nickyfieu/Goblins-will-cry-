@@ -9,7 +9,7 @@
 
 struct SkeletonData
 {
-	SkeletonData() = default;
+	SkeletonData(const std::wstring& dataName);
 
 	USHORT index = {};
 	std::wstring name = {};
